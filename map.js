@@ -10,6 +10,7 @@
   const selectedTime = document.getElementById('selected-time');
   const anyTimeLabel = document.getElementById('any-time');
 
+
   let filteredTrips = [];
 let filteredArrivals = new Map();
 let filteredDepartures = new Map();
@@ -277,8 +278,6 @@ let filteredStations = [];
     map.on('zoom', updatePositions);     // Update during zooming
     map.on('resize', updatePositions);   // Update on window resize
     map.on('moveend', updatePositions);  // Final adjustment after movement ends
-
-
 
 
 
