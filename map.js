@@ -113,6 +113,7 @@ let filteredStations = [];
       trip.started_at = new Date(trip.started_at);
       trip.ended_at = new Date(trip.ended_at);
     }
+    console.log(trips);
 
 
         let departures = d3.rollup(
