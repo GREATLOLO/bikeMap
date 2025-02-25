@@ -2,6 +2,7 @@
 
    mapboxgl.accessToken = "pk.eyJ1IjoibXJwYXNzZXJieSIsImEiOiJjbTdkd2N4OGEwN3VtMnJwcXlmcWtrNTJ4In0.w3EX4taxDes5XP6nBloPhw";
 
+  let stationFlow = d3.scaleQuantize().domain([0, 1]).range([0, 0.5, 1]);
 
 
    //select time slider element
@@ -113,7 +114,7 @@ let filteredStations = [];
       trip.started_at = new Date(trip.started_at);
       trip.ended_at = new Date(trip.ended_at);
     }
-    console.log(trips);
+    console.log(trips)
 
 
         let departures = d3.rollup(
@@ -162,7 +163,8 @@ let filteredStations = [];
     d3.select(this)
       .append('title')
       .text(`${d.totalTraffic} trips (${d.departures} departures, ${d.arrivals} arrivals)`);
-  });
+  })
+  .style("--departure-ratio", d => stationFlow(d.departures / d.totalTraffic));
 
         // Initial position update when map loads
   updatePositions();
@@ -219,7 +221,10 @@ let filteredStations = [];
               // Add <title> for browser tooltips
               d3.select(this).select('title')
                 .text(`${d.totalTraffic} trips (${d.departures} departures, ${d.arrivals} arrivals)`);
-            }); // Third function
+            })
+          .style("--departure-ratio", d => stationFlow(d.departures / d.totalTraffic));
+          
+          // Third function
           // circles = svg.selectAll('circle')
           // .data(filteredStations)
           // .enter()
